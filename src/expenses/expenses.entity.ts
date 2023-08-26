@@ -12,7 +12,7 @@ export class Expense {
 
   @Column() description: string;
   @Column() amount: number;
-  @Column() userId: string; // Assuming this is the user's ObjectId or a unique identifier
+  @Column() userId: string; // Assume this is the user's ObjectId or a unique identifier
 
   @UpdateDateColumn() updatedAt: Date;
 

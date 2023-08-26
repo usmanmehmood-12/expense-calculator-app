@@ -21,7 +21,6 @@ export class UsersService {
     const user = await this.userRepository.findOne({ where: { email: email } });
 
     if (!user) {
-      // Handle case when user doesn't exist
       return;
     }
 

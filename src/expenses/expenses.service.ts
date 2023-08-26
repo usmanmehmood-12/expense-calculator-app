@@ -11,6 +11,10 @@ export class ExpensesService {
     private readonly expenseRepository: MongoRepository<Expense>,
   ) {}
 
+  async getExpenses(userId: string): Promise<Expense[]> {
+    const expenses = await this.expenseRepository.find({ userId });
+    return expenses;
+  }
   async addExpense(userId: string, expenseData: any): Promise<Expense> {
     const expense = new Expense({
       userId,
@@ -33,7 +37,6 @@ export class ExpensesService {
 
       return await this.expenseRepository.save(expense);
     } catch (error) {
-      console.log('error: ', error);
       throw new NotFoundException('Expense not found');
     }
   }

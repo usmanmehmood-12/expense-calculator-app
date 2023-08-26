@@ -3,7 +3,9 @@ import {
   Body,
   Controller,
   Get,
+  Query,
   Post,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
@@ -19,8 +21,18 @@ export class UsersController {
   ) {}
 
   @Get()
-  async getUsers(): Promise<User[]> {
-    return await this.usersRepository.find();
+  async getUserByEmailandPassword(
+    @Query('email') email: string,
+    @Query('password') password: string,
+  ): Promise<User> {
+    const user = await this.usersRepository.findOne({
+      where: { email, password },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 
   @Post()
@@ -28,7 +40,9 @@ export class UsersController {
     if (!user || !user.name) {
       throw new BadRequestException(`A user must have a name and password`);
     }
-    return await this.userService.createUser(user);
+    const createdUser = await this.userService.createUser(user);
+
+    return createdUser;
   }
 
   @Post('reset-password')
