@@ -34,8 +34,19 @@ $ npm run start:prod
 
   
 ### ***Env:***
-PORT=8082 
+```bash
+# Port No
+PORT=8082
+
+# MongoDB database URI 
 MONGODB_CONNECTION_STRING=
+
+# MongoDB Database Name
 MONGODB_DATABASE=
+
+# User Email to send reset emails from
 EMAIL_USER=
+
+# User Email password
 EMAIL_PASSWORD=
+```
