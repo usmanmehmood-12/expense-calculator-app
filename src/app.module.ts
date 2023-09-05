@@ -13,10 +13,11 @@ import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { MailModule } from './mail/mail.module';
 import { MailService } from './mail/mail.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true}),
     TypeOrmModule.forRoot({
       type: 'mongodb',
       url: process.env.MONGODB_CONNECTION_STRING,
@@ -27,6 +28,7 @@ import { MailService } from './mail/mail.service';
       useNewUrlParser: true,
     }),
     TypeOrmModule.forFeature([User, Expense]),
+    AuthModule,
     ExpensesModule,
     UsersModule,
     MailModule,
