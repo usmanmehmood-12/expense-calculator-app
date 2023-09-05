@@ -3,6 +3,9 @@
 ## Description
 The Expense Calculator Application Backend is a user expense calculator application. 
 
+### ***UPDATE: JWT authentication is implemented and routes are updated***
+
+
 
 ## Installation
 
